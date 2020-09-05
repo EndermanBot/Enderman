@@ -1,6 +1,6 @@
 # Enderman
 
-![Logo](https://github.com/EndermanBot/Enderman/blob/master/logo.png?raw=true)
+![Logo](https://github.com/EndermanBot/Enderman/blob/master/enderman.jpg?raw=true)
 
 [Me Adicione no seu servidor!](https://discord.com/api/oauth2/authorize?client_id=682184789255520290&permissions=0&scope=bot)
 
