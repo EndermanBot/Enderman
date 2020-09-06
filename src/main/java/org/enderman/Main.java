@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.JDABuilder;
 public class Main {
     public static void main(String[] args) {
 		JDA jda;
-		String token = "NjgyMTg0Nzg5MjU1NTIwMjkw.XlZUGA.f2wWCGErmneNfjs03LYATg-bLCQ";
+		String token = "NjgyMTg0Nzg5MjU1NTIwMjkw.XlZUGA.w3CHsuI3vxsj8rrjzNAwlccgbyY";
 		try {
 			jda = JDABuilder.createDefault(token).build();
 			jda.awaitReady();
