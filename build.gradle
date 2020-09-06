@@ -1,0 +1,14 @@
+
+plugins {
+    id 'java'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_198'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.9'
+}
