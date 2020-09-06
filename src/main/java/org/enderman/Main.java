@@ -10,8 +10,12 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
 public class Main {
+	public static String PREFIX = "en!";
+	public static CommandHandler ch = new CommandHandler();
     public static void main(String[] args) {
 		JDA jda;
+		
+		
 		String token = null;
 		try {
 			Scanner scanner = new Scanner(new FileReader("token"));
@@ -25,9 +29,12 @@ public class Main {
 		} catch (LoginException e) {
 			System.out.println("Impossivel logar com o token: " + token);
 			System.out.println("Motivo: " + e.getMessage());
+			return;
 		} catch (InterruptedException e) {
 			System.out.println("O bot foi interrompido enquanto se conectava.");
+			return;
 		}
-		
+		jda.addEventListener(new CommandHandler.CommandListener());
+		ch.registerCommand("ban", new BanCommand());
 	}
 }
