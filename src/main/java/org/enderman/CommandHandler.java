@@ -1,8 +1,12 @@
 package org.enderman;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -14,9 +18,27 @@ public class CommandHandler {
 	static class CommandListener extends ListenerAdapter{
 		@Override
 		public void onMessageReceived(MessageReceivedEvent event) {
+			if(event.getAuthor().isBot()) return;
+			if(event.getAuthor().isFake()) return;
+			try {
+				Main.config = new JsonHelper("config.json");
+				Main.database = new JsonHelper("database.json");
+			} catch (JsonIOException | JsonSyntaxException | IOException e1) {
+				
+				e1.printStackTrace();
+			}
 			String message = event.getMessage().getContentRaw();
-			if(message.startsWith(Main.PREFIX)) {
-				if(Main.ch.handleCommand(Main.PREFIX, event) == Result.ERROR) {
+			JsonHelper guildPreferences;
+			if(!Main.database.contains(event.getGuild().getId())){
+				Main.database.setJsonObject(event.getGuild().getId(), new JsonHelper(new JsonObject()));
+			}
+			guildPreferences = Main.database.getJsonObject(event.getGuild().getId());
+			if(!guildPreferences.contains("prefix")){
+				guildPreferences.setString("prefix", Main.DEFAULT_PREFIX);
+			}
+			String prefix = guildPreferences.getString("prefix");
+			if(message.startsWith(prefix)) {
+				if(Main.ch.handleCommand(prefix, event) == Result.ERROR) {
 					event.getChannel().sendMessage("**Parece que houve algum erro enquanto executava o comando!**").queue();
 				}
 			}
@@ -57,6 +79,7 @@ public class CommandHandler {
 		}
 		String[] argsPass = new String[args.size()];
 		argsPass = args.toArray(argsPass);
+		
 		return executor.onCommand(prefix, argsPass, label, event)? Result.NO_ERROR : Result.ERROR;
 	}
 }

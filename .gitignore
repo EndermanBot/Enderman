@@ -9,3 +9,5 @@ token
 database.json
 
 bin/
+
+config.json

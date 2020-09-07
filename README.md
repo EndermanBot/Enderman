@@ -5,7 +5,7 @@
 [Me Adicione no seu servidor!](https://discord.com/api/oauth2/authorize?client_id=682184789255520290&permissions=0&scope=bot)
 
 Um simples bot para discord feito em Java!
-# Licence
+## Licence
 Leia o arquivo LICENSE para saber mais! 
 
 A licença atual é a GPL-3
